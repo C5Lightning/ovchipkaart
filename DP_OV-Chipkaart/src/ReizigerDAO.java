@@ -15,7 +15,9 @@ interface ReizigerDAO {
 
     public List<Reiziger> findAll() throws SQLException;
 
+    //eigen functies
     public boolean deleteByID(int id);
+    public Reiziger getReiziger(Reiziger reiziger);
 
 
 

@@ -14,6 +14,9 @@ public class ReizigerDAOPsql implements ReizigerDAO {
         this.conn = conn;
     }
 
+    public ReizigerDAOPsql() {
+    }
+
 
     public Reiziger reizigerObject(ResultSet set) throws SQLException {
         Reiziger r = new Reiziger();
@@ -69,7 +72,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             return true;
 
         } catch (Exception e) {
-            System.err.println("Er is een fout opgetreden: " + e.getMessage());
+            System.err.println("Er is een update fout opgetreden: " + e.getMessage());
             return false;
         }
 
@@ -88,7 +91,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
         }
         catch (Exception e)
         {
-            System.err.println("Er is een fout opgetreden: " + e.getMessage());
+            System.err.println("Er is een delete fout opgetreden: " + e.getMessage());
             return false;
         }
     }
@@ -159,19 +162,23 @@ public class ReizigerDAOPsql implements ReizigerDAO {
         {
             PreparedStatement mySt = conn.prepareStatement("DELETE FROM reiziger WHERE reiziger_id=?");
             mySt.setInt(1, id);
-            mySt.execute();
+            mySt.executeUpdate();
 
 
             return true;
         }
         catch (Exception e)
         {
-            System.err.println("Er is een fout opgetreden: " + e.getMessage());
+            System.err.println("Er is een DELETEBYID fout opgetreden: " + e.getMessage());
             return false;
         }
 
     }
 
+    @Override
+    public Reiziger getReiziger(Reiziger reiziger) {
+        return reiziger;
+    }
 
 
 }
