@@ -156,10 +156,10 @@ public class adresDAOPsql implements adresDAO {
 
         while (rS.next()) {
             Adres a = new Adres();
-            // id
+            //id
             a.setId(parseInt(rS.getString("adres_id")));
 
-            // postcode
+            //postcode
             a.setPostcode(rS.getString("postcode"));
 
             //huisnummer
@@ -168,7 +168,7 @@ public class adresDAOPsql implements adresDAO {
             //straat
             a.setStraat(rS.getString("straat"));
 
-            // Woonplaats
+            //Woonplaats
             a.setWoonplaats(rS.getString("woonplaats"));
 
             //reiziger_id
@@ -179,6 +179,7 @@ public class adresDAOPsql implements adresDAO {
         }
         return aL;
     }
+
     //Eigen functie
     @Override
     public boolean deleteByID(int id) {

@@ -39,6 +39,8 @@ public class ReizigerDAOPsql implements ReizigerDAO {
 
         r.setDate(Date.valueOf(set.getString("geboortedatum")).toLocalDate());
 
+        r.setKaart(new OVchipkaartDAOPsql(conn).findByReiziger(r));
+
         return r;
     }
 
@@ -149,6 +151,9 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             LocalDate localDate = LocalDate.parse(date, formatter);
 
             r.setDate(localDate);
+
+//            r.setKaart(new OVchipkaartDAOPsql(conn).findByReiziger(r));
+
             rL.add(r);
         }
         return rL;

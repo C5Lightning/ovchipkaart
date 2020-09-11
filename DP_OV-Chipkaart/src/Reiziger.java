@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Reiziger {
     private int reiziger_id;
@@ -7,6 +8,8 @@ public class Reiziger {
     private String tussenVoegsel;
     private String achternaam;
     private LocalDate geboorteDatum;
+
+    private List<OVchipkaart> kaart;
 
     public Reiziger(int id, String vL, String tV, String aN, LocalDate gD){
         reiziger_id = id;
@@ -57,6 +60,22 @@ public class Reiziger {
 
     public void setDate(LocalDate date) {
         this.geboorteDatum = date;
+    }
+
+    public LocalDate getGeboorteDatum() {
+        return geboorteDatum;
+    }
+
+    public void setGeboorteDatum(LocalDate geboorteDatum) {
+        this.geboorteDatum = geboorteDatum;
+    }
+
+    public List<OVchipkaart> getKaart() {
+        return kaart;
+    }
+
+    public void setKaart(List<OVchipkaart> kaart) {
+        this.kaart = kaart;
     }
 
     @Override
