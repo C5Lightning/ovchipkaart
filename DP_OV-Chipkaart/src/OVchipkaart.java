@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.List;
 
 public class OVchipkaart {
 
@@ -7,6 +8,8 @@ public class OVchipkaart {
     private int klasse;
     private double saldo;
     private Reiziger reiziger;
+
+    private List<Product> product;
 
     public OVchipkaart(int kN, LocalDate gT, int kl, double sal, Reiziger rId){
         kaartnummer = kN;

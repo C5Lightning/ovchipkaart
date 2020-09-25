@@ -1,3 +1,6 @@
+import org.postgresql.gss.GSSOutputStream;
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +17,7 @@ public class main {
             testReizigerDAO(new ReizigerDAOPsql(connection));
 //            testAdresDAO(new adresDAOPsql(connection));
             testOVDAO(new OVchipkaartDAOPsql(connection));
+            testPVDAO(new ProductDAOPsql(connection));
 
         }catch (SQLException e){
             System.out.println("Er is een SQL fout opgetreden: " + e.getMessage());
@@ -125,7 +129,6 @@ public class main {
 
 
         for (OVchipkaart o : ov){
-//            o.setReiziger(new ReizigerDAOPsql(conn).findByID(parseInt(set.getString("reiziger_id"))));
             System.out.println(o);
         }
         System.out.println();
@@ -177,6 +180,59 @@ public class main {
 
         System.out.println(odao.findByReiziger(jelle));
         //informatie van Jelle wordt teruggegeven.
+
+    }
+
+    private static void testPVDAO(ProductDAO pdao) throws SQLException {
+        OVchipkaartDAO odao = null;
+
+        List<Product> pL = pdao.findAll();
+        ov_chipkaart_product koppel = new ov_chipkaart_product();
+
+
+        for (Product p : pL) {
+            System.out.println(p);
+        }
+        System.out.println();
+
+        System.out.println(pdao.findByProductNummer(3));
+
+        System.out.println();
+
+        //oude save delete en update functies
+
+        Product p = new Product(7, "Amsterdam Bike Ticket", "Voordelig een fiets lenen.", 19.30);
+        // Ik laat save gecomment om errors te voorkomen. De findByProductNaam laat zien dat het product gesaved is.
+        // en netjes in de console gedisplayed kan worden
+
+        //pdao.save(p);
+
+        System.out.println(pdao.findByProductNummer(p.getProduct_nummer()));
+        //uitkomst: [Product{product_nummer=7, naam='Amsterdam Bike Ticket', beschrijving='Voordelig een fiets lenen.', prijs=19.3}]
+
+        System.out.println();
+
+        p.setNaam("Den Haag Flight Club");
+        p.setBeschrijving("Lekker dagje vliegen");
+        p.setPrijs(25.70);
+
+        //pdao.update(p);
+        System.out.println(pdao.findByProductNummer(p.getProduct_nummer()));
+        //uitkomst: [Product{product_nummer=7, naam='Den Haag Flight Club', beschrijving='Lekker dagje vliegen', prijs=25.7}]
+        System.out.println();
+
+
+        String gbdatum = "1981-03-14";
+
+        Reiziger jelle = new Reiziger(88, "S", "", "Boers", Date.valueOf(gbdatum).toLocalDate());
+
+        OVchipkaart OVs2 = new OVchipkaart(5666, LocalDate.now(), 3, 20.20, jelle);
+
+
+        //System.out.println(koppel.findByOVChipkaart(OVs2));
+        //uitkomst: OVchipkaart{kaartnummer = 5666, geldig_tot = 2020-09-12, klasse = 2, saldo = 520.4,
+        // reiziger_id = reiziger{reiziger_id=88, voorletters='J', tussenVoegsel='', achternaam='Bakker', geboorteDatum=1981-03-14}}
+
 
     }
 }

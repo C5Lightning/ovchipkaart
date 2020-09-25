@@ -11,6 +11,8 @@ public class Reiziger {
 
     private List<OVchipkaart> kaart;
 
+
+
     public Reiziger(int id, String vL, String tV, String aN, LocalDate gD){
         reiziger_id = id;
         voorletters = vL;
